@@ -1,0 +1,5 @@
+name: RIAServerAPI
+version: '${version}'
+main: ink.magma.riaserverapi.RIAServerAPI_Bukkit
+api-version: '1.18'
+authors: [MagmaBlock]

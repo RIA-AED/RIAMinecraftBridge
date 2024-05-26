@@ -1,0 +1,4 @@
+name: RIAServerAPI
+main: ink.magma.riaserverapi.RIAServerAPI_Bungee
+version: '${version}'
+author: MagmaBlock
