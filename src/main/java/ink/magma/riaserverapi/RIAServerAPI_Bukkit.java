@@ -20,5 +20,6 @@ public final class RIAServerAPI_Bukkit extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+        ApiServer.stop();
     }
 }

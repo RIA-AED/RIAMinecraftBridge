@@ -14,4 +14,9 @@ public final class RIAServerAPI_Bungee extends Plugin {
 
         ApiServer.init();
     }
+
+    @Override
+    public void onDisable() {
+        ApiServer.stop();
+    }
 }

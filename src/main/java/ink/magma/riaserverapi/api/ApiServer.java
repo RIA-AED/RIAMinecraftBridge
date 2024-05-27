@@ -48,4 +48,7 @@ public class ApiServer {
         AdopterProvider.get().logInfo("模块已全部注册完毕.");
     }
 
+    public static void stop() {
+        Spark.stop();
+    }
 }
