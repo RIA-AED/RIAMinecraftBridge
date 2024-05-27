@@ -10,6 +10,7 @@ import spark.Route;
 import spark.RouteGroup;
 import spark.Spark;
 
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -47,7 +48,7 @@ public class CommandConsole implements Module {
     private @NotNull Route dispatchRoute() {
         return (req, res) -> {
             // 将请求体解析为Map格式
-            Map body = new Gson().fromJson(req.body(), Map.class);
+            var body = new Gson().fromJson(req.body(), Map.class);
 
             // 从请求体中获取命令和类型
             String command = (String) body.get("command");
@@ -63,6 +64,10 @@ public class CommandConsole implements Module {
             if (type.equals(ConsoleExecuteType.CONSOLE_WRAPPER)) {
                 try {
                     UUID uuid = platform.dispatchCommandByWrapper(command);
+                    platform.logInfo(MessageFormat.format(
+                            "{0} 通过 API 执行了控制台命令: {1}",
+                            req.ip(), command
+                    ));
                     // 返回执行的控制台的 UUID
                     return Map.of("dispatched", true, "senderUUID", uuid.toString());
                 } catch (UnsupportedOperationException e) {
@@ -73,6 +78,10 @@ public class CommandConsole implements Module {
             // 使用真实控制台模式执行命令，不返回执行结果
             if (type.equals(ConsoleExecuteType.CONSOLE)) {
                 platform.dispatchCommand(command);
+                platform.logInfo(MessageFormat.format(
+                        "{0} 通过 API 执行了控制台命令: {1}",
+                        req.ip(), command
+                ));
                 return Map.of("dispatched", true);
             }
 

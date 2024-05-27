@@ -1,6 +1,5 @@
 package ink.magma.riaserverapi.platform.console.sender.fake;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
@@ -12,25 +11,20 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
-import java.util.logging.Logger;
 
 public class BukkitFakeCommandSender implements CommandSender {
     private final CommandSender sender;
     private final List<String> logs;
-    private final Logger logger;
 
     public BukkitFakeCommandSender(CommandSender sender) {
         this.sender = sender;
         this.logs = new ArrayList<>();
-        this.logger = Bukkit.getLogger();
     }
 
     public List<String> getLogs() {
         List<String> result = new ArrayList<>();
 
-        logs.forEach(log -> {
-            result.addAll(Arrays.asList(log.split("\n")));
-        });
+        logs.forEach(log -> result.addAll(Arrays.asList(log.split("\n"))));
 
         return result;
     }
@@ -38,7 +32,6 @@ public class BukkitFakeCommandSender implements CommandSender {
     @Override
     public void sendMessage(@NotNull String message) {
         logs.add(ChatColor.stripColor(message));
-        logger.info("[PluginConsole] " + message);
         sender.sendMessage(message);
     }
 
@@ -46,7 +39,6 @@ public class BukkitFakeCommandSender implements CommandSender {
     public void sendMessage(String[] messages) {
         for (String message : messages) {
             logs.add(ChatColor.stripColor(message));
-            logger.info("[PluginConsole] " + message);
         }
         sender.sendMessage(messages);
     }
@@ -54,7 +46,6 @@ public class BukkitFakeCommandSender implements CommandSender {
     @Override
     public void sendMessage(@Nullable UUID sender, @NotNull String message) {
         logs.add(ChatColor.stripColor(message));
-        logger.info("[PluginConsole] " + message);
         this.sender.sendMessage(sender, message);
     }
 
@@ -62,7 +53,6 @@ public class BukkitFakeCommandSender implements CommandSender {
     public void sendMessage(@Nullable UUID sender, @NotNull String... messages) {
         for (String message : messages) {
             logs.add(ChatColor.stripColor(message));
-            logger.info("[PluginConsole] " + message);
         }
         this.sender.sendMessage(sender, messages);
     }
