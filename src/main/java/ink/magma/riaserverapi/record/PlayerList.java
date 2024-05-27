@@ -1,4 +1,4 @@
-package ink.magma.riaserverapi.platform.player.list;
+package ink.magma.riaserverapi.record;
 
 import java.util.List;
 

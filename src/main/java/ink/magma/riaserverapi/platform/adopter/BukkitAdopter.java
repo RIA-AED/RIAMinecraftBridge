@@ -2,7 +2,8 @@ package ink.magma.riaserverapi.platform.adopter;
 
 import ink.magma.riaserverapi.RIAServerAPI_Bukkit;
 import ink.magma.riaserverapi.platform.console.sender.fake.BukkitFakeCommandSender;
-import ink.magma.riaserverapi.platform.player.list.PlayerList;
+import ink.magma.riaserverapi.record.PlayerList;
+import ink.magma.riaserverapi.record.Plugin;
 import org.bukkit.Bukkit;
 
 import javax.annotation.Nullable;
@@ -88,5 +89,21 @@ public class BukkitAdopter implements PlatformAdopter {
     @Override
     public void logWarn(String message) {
         RIAServerAPI_Bukkit.instance.getLogger().warning(message);
+    }
+
+    @Override
+    public Collection<Plugin> getPlugins() {
+        org.bukkit.plugin.Plugin[] platformPlugins = RIAServerAPI_Bukkit.instance.getServer().getPluginManager().getPlugins();
+        if (platformPlugins != null) {
+            return Arrays.stream(platformPlugins)
+                    .map(plugin -> new Plugin(
+                            plugin.getName(),
+                            plugin.getDescription().getVersion(),
+                            plugin.getDescription().getAuthors(),
+                            plugin.getDescription().getDescription()
+                    ))
+                    .toList();
+        }
+        return List.of();
     }
 }

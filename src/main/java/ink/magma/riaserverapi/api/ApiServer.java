@@ -1,9 +1,7 @@
 package ink.magma.riaserverapi.api;
 
-import ink.magma.riaserverapi.api.module.CommandConsole;
-import ink.magma.riaserverapi.api.module.MCSpark;
 import ink.magma.riaserverapi.api.module.Module;
-import ink.magma.riaserverapi.api.module.Player;
+import ink.magma.riaserverapi.api.module.*;
 import ink.magma.riaserverapi.api.route.NotSupportRoute;
 import ink.magma.riaserverapi.api.transformer.JsonTransformer;
 import ink.magma.riaserverapi.platform.PlatformState;
@@ -32,6 +30,7 @@ public class ApiServer {
 
         modules.add(new CommandConsole());
         modules.add(new Player());
+        modules.add(new PluginList());
 
         // 默认全局使用 JSON
         Spark.before((req, res) -> res.type("application/json"));
@@ -39,6 +38,9 @@ public class ApiServer {
 
         // 404
         Spark.notFound(NotSupportRoute.ErrorResponse);
+        Spark.internalServerError(new JsonTransformer().render(
+                Map.of("message", "服务端发生意外错误。可能的解决方法：1. 参数是否符合业务；2. 联系服务端运维解决。")
+        ));
 
         // 注册模块
         modules.forEach(Module::register);

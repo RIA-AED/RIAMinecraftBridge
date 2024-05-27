@@ -1,15 +1,14 @@
 package ink.magma.riaserverapi.platform.adopter;
 
 import ink.magma.riaserverapi.RIAServerAPI_Bungee;
-import ink.magma.riaserverapi.platform.player.list.PlayerList;
+import ink.magma.riaserverapi.record.PlayerList;
+import ink.magma.riaserverapi.record.Plugin;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class BungeeAdopter implements PlatformAdopter {
     @Override
@@ -80,5 +79,22 @@ public class BungeeAdopter implements PlatformAdopter {
     @Override
     public void logError(String message) {
         RIAServerAPI_Bungee.instance.getLogger().severe(message);
+    }
+
+    @Override
+    public Collection<Plugin> getPlugins() {
+        Collection<net.md_5.bungee.api.plugin.Plugin> platformPlugins = RIAServerAPI_Bungee.instance.getProxy().getPluginManager().getPlugins();
+        if (platformPlugins != null) {
+            return platformPlugins.stream()
+                    .map(plugin -> new Plugin(
+                            plugin.getDescription().getName(),
+                            plugin.getDescription().getVersion(),
+                            Collections.singleton(plugin.getDescription().getAuthor()),
+                            plugin.getDescription().getDescription()
+                    ))
+                    .toList();
+        }
+
+        return List.of();
     }
 }

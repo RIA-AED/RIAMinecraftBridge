@@ -1,9 +1,11 @@
 package ink.magma.riaserverapi.platform.adopter;
 
-import ink.magma.riaserverapi.platform.player.list.PlayerList;
+import ink.magma.riaserverapi.record.PlayerList;
+import ink.magma.riaserverapi.record.Plugin;
 
 import javax.annotation.Nullable;
 import java.io.File;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -71,4 +73,9 @@ public interface PlatformAdopter {
      * @param message 日志
      */
     void logError(String message);
+
+    /**
+     * 获取平台的插件列表
+     */
+    Collection<Plugin> getPlugins();
 }
