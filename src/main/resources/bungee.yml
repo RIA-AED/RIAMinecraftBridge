@@ -1,4 +1,4 @@
-name: RIASpigotBridge
-main: ink.magma.riaspigotbridge.RIASpigotBridge_Bungee
+name: RIAMinecraftBridge
+main: ink.magma.riasminecraftbridge.RIAMinecraftBridge_Bungee
 version: '${version}'
 author: MagmaBlock

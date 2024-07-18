@@ -1,5 +1,5 @@
-name: RIASpigotBridge
+name: RIAMinecraftBridge
 version: '${version}'
-main: ink.magma.riaspigotbridge.RIASpigotBridge_Bukkit
+main: ink.magma.riasminecraftbridge.RIAMinecraftBridge_Bukkit
 api-version: '1.18'
 authors: [MagmaBlock]
