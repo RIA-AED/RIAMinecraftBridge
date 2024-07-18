@@ -1,4 +1,4 @@
-name: RIAServerAPI
-main: ink.magma.riaserverapi.RIAServerAPI_Bungee
+name: RIASpigotBridge
+main: ink.magma.riaspigotbridge.RIASpigotBridge_Bungee
 version: '${version}'
 author: MagmaBlock

@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'ink.magma'
-version = '1.0.2'
+version = '1.1.0'
 
 repositories {
     mavenCentral()
@@ -21,8 +21,8 @@ dependencies {
 
     compileOnly 'me.lucko:spark-api:0.1-SNAPSHOT'
 
+    implementation 'io.socket:socket.io-client:2.1.1'
     compileOnly 'org.apache.logging.log4j:log4j-core:2.19.0'
-    implementation "com.sparkjava:spark-core:2.9.4"
     implementation 'com.google.code.gson:gson:2.10.1'
     implementation 'org.jetbrains:annotations:24.1.0'
     implementation "de.exlll:configlib-yaml:4.5.0"
