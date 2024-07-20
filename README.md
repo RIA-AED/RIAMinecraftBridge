@@ -72,7 +72,7 @@ package ink.magma.riasminecraftbridge.socket.bridge.module;
 import ink.magma.riasminecraftbridge.platform.adopter.AdopterProvider;
 import ink.magma.riasminecraftbridge.platform.adopter.PlatformAdopter;
 import ink.magma.riasminecraftbridge.record.Plugin;
-import ink.magma.riasminecraftbridge.socket.bridge.ClientMain;
+import ink.magma.riasminecraftbridge.socket.bridge.APIServer;
 import ink.magma.riasminecraftbridge.socket.bridge.module.define.Module;
 import ink.magma.riasminecraftbridge.utils.json.GsonIns;
 import io.socket.client.Socket;

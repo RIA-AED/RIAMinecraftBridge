@@ -1,11 +1,12 @@
 package ink.magma.riasminecraftbridge;
 
 import ink.magma.riasminecraftbridge.platform.PlatformState;
-import ink.magma.riasminecraftbridge.socket.bridge.ClientMain;
+import ink.magma.riasminecraftbridge.socket.bridge.APIServer;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class RIAMinecraftBridge_Bukkit extends JavaPlugin {
     public static RIAMinecraftBridge_Bukkit instance;
+    private APIServer apiServer;
 
     @Override
     public void onEnable() {
@@ -13,12 +14,12 @@ public final class RIAMinecraftBridge_Bukkit extends JavaPlugin {
         PlatformState.setPlatform(PlatformState.Platform.BUKKIT);
         instance = this;
 
-        ClientMain.init();
+        apiServer = new APIServer();
     }
 
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        ClientMain.stop();
+        apiServer.stop();
     }
 }
